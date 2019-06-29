@@ -26,7 +26,7 @@ services:
     image: jaegertracing/all-in-one
     ports:      
       - "16686:16686"  #access to jaeger UI (http://localhost:16686)
-      - "6831:6831" #only for debugging
+      - "6831:6831"    #only for debugging
   grafana:     
     container_name: grafana
     build: ./grafana
