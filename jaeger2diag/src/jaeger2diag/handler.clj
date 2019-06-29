@@ -8,6 +8,13 @@
             [ring.middleware.cors :refer [wrap-cors]]
   )
 )
+
+;------------------------
+; Environment variables
+(def jaegerHost 
+  (or (System/getenv "JAEGER_HOST") "localhost")
+)
+
 ;------------------------
 ; Schemas
 
@@ -133,7 +140,7 @@
 )
 
 (defn getServices []
-  (:data (json/read-str (:body (client/get "http://localhost:16686/api/services" ) {:accept :json}) :key-fn keyword))
+  (:data (json/read-str (:body (client/get (<< "http://~{jaegerHost}:16686/api/services")) {:accept :json}) :key-fn keyword))
 )
 
 ;------------------------
@@ -214,7 +221,7 @@
             (:body                 
               (client/get 
                 (let [startNanoS (* startMilliS 1000) endNanoS (* endMilliS 1000)]                  
-                  (let [url (<< "http://localhost:16686/api/traces?end=~{endNanoS}&limit=~{limit}&lookback=1h&maxDuration&minDuration&service=~{service}&start=~{startNanoS}" )]
+                  (let [url (<< "http://~{jaegerHost}:16686/api/traces?end=~{endNanoS}&limit=~{limit}&lookback=1h&maxDuration&minDuration&service=~{service}&start=~{startNanoS}" )]
                     (println url)
                     url
                   )

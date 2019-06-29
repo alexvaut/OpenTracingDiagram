@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1561780743343,
+  "iteration": 1561788706356,
   "links": [],
   "panels": [
     {
@@ -98,6 +98,7 @@
       "mode": "url",
       "nullPointMode": "connected",
       "seriesOverrides": [],
+      "targets": [],
       "thresholds": "0,10",
       "timeFrom": null,
       "timeShift": null,
@@ -128,6 +129,7 @@
       {
         "allValue": null,
         "current": {
+          "tags": [],
           "text": "akka",
           "value": "akka"
         },
@@ -171,7 +173,7 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {
