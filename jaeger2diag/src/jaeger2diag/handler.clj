@@ -215,7 +215,7 @@
         (GET "/sequence" []
           :return String
           :query-params [limit :- Long, service :- String, startMilliS :- Long, endMilliS :- Long]
-          :summary "provide a sequence diargram (Mermaid format)."        
+          :summary "provide a sequence diagram of traces (Mermaid format)."        
           (println "Service" service)
           (serviceGraph
             (:body                 
