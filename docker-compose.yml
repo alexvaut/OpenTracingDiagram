@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+  local:
+    image: ${DOCKER_REGISTRY-}local
+    build: 
+      context: https://github.com/alexvaut/akka.opentracing.git
+      dockerfile: "src/Akka/OpenTracing/Samples/Cluster/Dockerfile"
+    environment:
+      JAEGER_SERVICE_NAME: akka
+      JAEGER_AGENT_HOST: jaeger
+      JAEGER_AGENT_PORT: 6831      
+      JAEGER_SAMPLER_TYPE: const
+      JAEGER_SAMPLER_PARAM: 1
+      JAEGER_REPORTER_LOG_SPANS: "true"        
+  jaeger:    
+    container_name: jaeger 
+    image: jaegertracing/all-in-one
+    ports:      
+      - "16686:16686"
+      - "6831:6831" #only for debugging
+  grafana:     
+    container_name: grafana
+    build: ./grafana
+    environment:
+      - GF_USERS_ALLOW_SIGN_UP=true     #only for testing
+      - GF_AUTH_ANONYMOUS_ENABLED=true  #only for testing      
+    ports:
+      - "3001:3000"    
