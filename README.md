@@ -2,10 +2,10 @@
 _Use traces to describe micro-services architecture._
 
 ## The problem
-Microservices architectures are complex, it's never easy to write and maintain documention around it. Add asynchronous messages heaviliy used in reactive architecture, it becomes almost unrealistic to describe how a system is working. Even in monolith system, it's a challenge.
+Microservices architectures are complex, it's never easy to write and maintain documentation around it. Add asynchronous messages heavily used in reactive architectures, it becomes almost unrealistic to describe how such a system is working. Even in monolith system, it's a challenge. How to help a developer improving/fixing a system where there is nothing to guide expect the system itself ?
 
 ## The idea
-With initiatives such as OpenTracing or OpenCensus, traces are easier and easier to get. So what about use traces to infer architecture ? However, unless we know exactly what we are looking for in alrge amount of traces, it's quite hard to extract the architecture: too much traces kill the traces in this case. We weed something on top to make some sense of them.
+With initiatives such as [OpenTracing](https://opentracing.io/) or [OpenCensus](https://opencensus.io/), traces are easy to acquire in the micro services world. So what about using traces in a bottom-up approach to infer the architecture ? However, unless we know exactly what we are looking for in large amount of traces, it's quite hard to extract the right information: too much traces kill the traces in this case. We weed something on top to make some sense of them.
 
 ## The beginning of a solution
 
@@ -41,7 +41,7 @@ The information recorded for each span
 One trace made of several spans in jaeger
 ![CaptureJ](doc/CaptureJaeger.JPG?raw=true)
 
-Same trace rendered as as a sequence diagram
+Same trace rendered as a sequence diagram
 ![Capture2](doc/Capture2.JPG?raw=true)
 
 ### Demo
@@ -49,4 +49,13 @@ Same trace rendered as as a sequence diagram
 From docker-compose to a diagram sequence in grafana
 ![Demo](doc/OpenTracingDiagram1.gif?raw=true)
 
+## Future
 
+Many ideas can emerge from this work, some:
+- Provide more inputs (like jaeger UI) and link the 2 UIs.
+- Improve diagrams (mermaidjs is quite limited).
+- Cluster traces to extract the most common sequence diagrams.
+- Build dependency diagrams between components (kind of available in Jaeger already).
+- Use metrics (from prometheus for instance) on components to (this is where the [merge of OpenCensus and OpenTracing should help](https://medium.com/opentracing/a-roadmap-to-convergence-b074e5815289)):
+  - Focus the architecture description on heavily used components, long processing...
+  - Color/Format messages, components.
