@@ -2,10 +2,10 @@
 _Use traces to describe micro-services architecture._
 
 ## The problem
-Microservices architectures are complex, it's never easy to write and maintain documentation around it. Add asynchronous messages heavily used in reactive architectures, it becomes almost unrealistic to describe how such a system is working. Even in monolith system, it's a challenge. How to help a developer improving/fixing a system where there is nothing to guide expect the system itself ?
+Microservices architectures are complex, it's never easy to write and maintain documentation around it. Add asynchronous messages heavily used in reactive applications, it becomes almost unrealistic to describe how such a system is working. It's a challenge even in monolith system. So, how to help a developer improving/fixing a system where there is nothing to guide expect the system itself ?
 
 ## The idea
-With initiatives such as [OpenTracing](https://opentracing.io/) or [OpenCensus](https://opencensus.io/), traces are easy to acquire in the micro services world. So what about using traces in a bottom-up approach to infer the architecture ? However, unless we know exactly what we are looking for in large amount of traces, it's quite hard to extract the right information: too much traces kill the traces in this case. We weed something on top to make some sense of them.
+With initiatives such as [OpenTracing](https://opentracing.io/) or [OpenCensus](https://opencensus.io/), traces are easy to acquire in the micro services world (pending each component is compatible with those frameworks). So what about using traces in a bottom-up approach to infer the architecture ? However, unless we know exactly what we are looking for in large amount of traces, it's quite hard to extract the right information: too much traces kill the traces. We weed something on top to make some sense of them.
 
 ## The beginning of a solution
 
