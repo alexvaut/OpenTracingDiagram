@@ -63,8 +63,12 @@
   (:value (first (filter (fn [tag] (= keyName (:key tag))) (:tags span))))  
 )
 
+(defn strip [coll chars]
+  ;(println coll)
+  (apply str (remove #((set chars) %) coll)))
+
 (defn mermaidName [x] 
-  (clojure.string/replace x #"[a-z\.]*:\/\/[^\/\s]+\/(.*)" "/$1")
+  (strip (clojure.string/replace x #"[a-z\.]*:\/\/[^\/\s]+\/(.*)" "/$1")  "+~")
 )
 
 (defn buildMessage [span] 
@@ -124,7 +128,7 @@
 )
 
 (defn mermaidjsfy [message] 
-  (str "\t" (:sender message) "->>" (:receiver message)  ":"  (mermaidMessageType (:message message))  "\"\n" )
+  (str "\t" (:sender message) "->>" (:receiver message)  ":"  (mermaidMessageType (:message message))  "\n" )
 )
 
 (defn serviceGraph [tracesStr] 
@@ -217,19 +221,25 @@
           :query-params [limit :- Long, service :- String, startMilliS :- Long, endMilliS :- Long]
           :summary "provide a sequence diagram of traces (Mermaid format)."        
           (println "Service" service)
-          (serviceGraph
-            (:body                 
-              (client/get 
-                (let [startNanoS (* startMilliS 1000) endNanoS (* endMilliS 1000)]                  
-                  (let [url (<< "http://~{jaegerHost}:16686/api/traces?end=~{endNanoS}&limit=~{limit}&lookback=1h&maxDuration&minDuration&service=~{service}&start=~{startNanoS}" )]
-                    (println url)
-                    url
+          (let 
+            [ret 
+              (serviceGraph
+                (:body                 
+                  (client/get 
+                    (let [startNanoS (* startMilliS 1000) endNanoS (* endMilliS 1000)]                  
+                      (let [url (<< "http://~{jaegerHost}:16686/api/traces?end=~{endNanoS}&limit=~{limit}&lookback=1h&maxDuration&minDuration&service=~{service}&start=~{startNanoS}" )]
+                        (println url)
+                        url
+                      )
+                    )              
+                    {:accept :json}
                   )
-                )              
-                {:accept :json}
-              )
-            )
-          ) 
+                )
+              ) 
+            ]          
+            (println ret)
+            ret
+          )
         )
       )    
     )
