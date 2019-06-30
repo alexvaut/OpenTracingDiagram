@@ -31,5 +31,22 @@ Wait a bit for all the containers to be up and then:
 - Browse to http://localhost:3001/d/mddcLWmWk/sequence-diagram-from-traces to see the grafana dashboard where sequence diagrams are displayed. Click on refresh (top-right of the grafana screen) to display a new sequence diagram: jaeger is returning random traces when filtering them, by default only one trace is displayed, you can increase this limit on the dashboard, it's a grafana variable.
 
 ## Screenshots
+A sequence diagram rendered in Grafana
+![Capture1](doc/Capture.JPG?raw=true)
 
-Commin soon...
+The information recorded for each span
+![CaptureDetails](doc/CaptureDetails1.JPG?raw=true)
+
+### One trace to one diagram
+One trace made of several spans in jaeger
+![CaptureJ](doc/CaptureJaeger.JPG?raw=true)
+
+Same trace rendered as as a sequence diagram
+![Capture2](doc/Capture2.JPG?raw=true)
+
+### Demo
+
+From docker-compose to a diagram sequence in grafana
+![Demo](doc/OpenTracingDiagram1.gif?raw=true)
+
+
