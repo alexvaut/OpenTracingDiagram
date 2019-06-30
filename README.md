@@ -1,4 +1,4 @@
-# OpenTracingDiagram
+# Open Tracing Diagram
 _Use traces to describe micro-services architecture._
 
 ## The problem
